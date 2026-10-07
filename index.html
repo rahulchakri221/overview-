@@ -87,6 +87,7 @@ h2{font-size:clamp(2rem,5vw,3.6rem);font-weight:800;margin-bottom:28px;color:var
 .ring img{width:100%;height:100%;object-fit:cover;display:block}
 .ring figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;font-weight:700;background:linear-gradient(transparent,rgba(142,11,16,.92))}
 .reel .box{border:6px solid var(--white);border-radius:20px;overflow:hidden;background:#000;box-shadow:0 30px 50px -20px rgba(0,0,0,.6)}.reel iframe{display:block;width:100%;aspect-ratio:16/9;border:0}.dl{margin-top:16px}
+
 /* floating 3D food in hero */
 .hero .orb{position:absolute;font-size:clamp(2.4rem,6vw,4.4rem);filter:drop-shadow(0 16px 10px rgba(0,0,0,.4));animation:fl 5s ease-in-out infinite;pointer-events:none;will-change:transform}
 .o1{left:46%;top:16%}.o2{right:4%;bottom:14%;animation-delay:-2s}.o3{left:44%;bottom:6%;animation-delay:-3s}
@@ -105,17 +106,6 @@ h2{font-size:clamp(2rem,5vw,3.6rem);font-weight:800;margin-bottom:28px;color:var
 .card p{font-size:.95rem;margin:6px 0 10px;color:#5b3a3a}
 .price{display:inline-block;background:var(--green);color:var(--white);font-family:'Baloo 2';font-weight:800;font-size:1.2rem;padding:.1em .7em;border-radius:99px}
 
-.card .media{position:relative;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,var(--a),var(--b))}
-.card .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;aspect-ratio:auto}
-.card div.media,.card div.art{padding:0}
-.art{position:absolute;inset:0;display:grid;place-items:center;perspective:500px}
-.plate{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e9e1d4 60%,#c9bda9);
-  box-shadow:0 18px 0 -2px rgba(0,0,0,.28),inset 0 -8px 14px rgba(0,0,0,.15);transform:rotateX(58deg);animation:spin 9s linear infinite}
-.plate::after{content:"";position:absolute;inset:14%;border-radius:50%;border:3px dashed rgba(215,20,26,.45)}
-.food{position:relative;font-size:clamp(3.4rem,9vw,4.6rem);filter:drop-shadow(0 14px 8px rgba(0,0,0,.4));animation:bob 3.2s ease-in-out infinite;transform:translateY(-6%)}
-@keyframes bob{50%{translate:0 -10px}}
-@keyframes spin{to{transform:rotateX(58deg) rotateZ(360deg)}}
-
 /* ORDER + FIND */
 .order{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 .order a{display:block;text-decoration:none;background:var(--white);color:var(--ink);padding:26px;border-radius:18px;font-weight:700;border-bottom:8px solid var(--yellow)}
@@ -123,10 +113,7 @@ h2{font-size:clamp(2rem,5vw,3.6rem);font-weight:800;margin-bottom:28px;color:var
 .find{display:grid;grid-template-columns:1fr 1.3fr;gap:30px;align-items:stretch}
 .find iframe{width:100%;min-height:320px;border:0;border-radius:18px}
 @media(max-width:760px){.find{grid-template-columns:1fr}}
-
-footer{background:var(--ink);text-align:center;padding:32px 20px;font-size:.95rem;display:flex;flex-direction:column;gap:8px;align-items:center}
-.designer-credit{color:var(--yellow);font-weight:700;letter-spacing:.5px;font-size:1.05rem}
-
+footer{background:var(--ink);text-align:center;padding:28px;font-size:.95rem}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -149,16 +136,101 @@ footer{background:var(--ink);text-align:center;padding:32px 20px;font-size:.95re
     </div>
     <div class="stage">
       <div class="tilt" id="heroTilt">
-        <div class="shot"><img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80" alt="Tasty &amp; Quality Noodles &amp; Biryani Spot shop front on Vivekananda Road, Gudur"></div>
+        <div class="shot"><img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=60" alt="Biryani Spot Hero"></div>
       </div>
     </div>
   </div>
 </header>
 
+<!-- MENU SECTION WITH ORIGINAL FOOD PHOTOS -->
+<section class="pad light" id="menu">
+  <div class="wrap">
+    <h2>Our Delicious Menu</h2>
+    <div class="tabs">
+      <button aria-pressed="true" onclick="filterMenu('all')">All</button>
+      <button aria-pressed="false" onclick="filterMenu('biryani')">Biryani</button>
+      <button aria-pressed="false" onclick="filterMenu('noodles')">Noodles & Rice</button>
+      <button aria-pressed="false" onclick="filterMenu('starters')">Starters</button>
+    </div>
+    <div class="cards" id="menuCards">
+      <!-- Item 1 -->
+      <div class="card" data-category="biryani">
+        <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop&q=60" alt="Chicken Dum Biryani">
+        <div>
+          <h3>Chicken Dum Biryani</h3>
+          <p>Aromatic basmati rice cooked with tender chicken pieces and traditional spices.</p>
+          <span class="price">₹180</span>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="card" data-category="noodles">
+        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&auto=format&fit=crop&q=60" alt="Veg Noodles">
+        <div>
+          <h3>Veg Hakka Noodles</h3>
+          <p>Stir-fried noodles tossed with fresh crunchy vegetables and sauces.</p>
+          <span class="price">₹100</span>
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="card" data-category="noodles">
+        <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&auto=format&fit=crop&q=60" alt="Chicken Fried Rice">
+        <div>
+          <h3>Chicken Fried Rice</h3>
+          <p>Wok-tossed rice with shredded chicken, eggs, and spring onions.</p>
+          <span class="price">₹130</span>
+        </div>
+      </div>
+      <!-- Item 4 -->
+      <div class="card" data-category="starters">
+        <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=60" alt="Chicken 65">
+        <div>
+          <h3>Chicken 65 Starter</h3>
+          <p>Deep-fried spicy red chicken chunks loaded with curry leaves and green chilies.</p>
+          <span class="price">₹160</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIND US & ORDER -->
+<section class="pad" id="find">
+  <div class="wrap">
+    <h2>Find Us</h2>
+    <div class="find">
+      <div>
+        <p style="margin-bottom:14px; font-size:1.1rem;"><strong>Tasty & Quality Noodles & Biryani Spot</strong><br>Vivekananda Road, Gudur, Andhra Pradesh.</p>
+        <div class="order" id="order">
+          <a href="tel:+919876543210"><b>Call to Order</b>+91 98765 43210</a>
+        </div>
+      </div>
+      <div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.0416955740445!2d79.8492!3d14.1502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4b5377d63a4eb3%3A0x42f7c0d7f9509df6!2sGudur%2C%2520Andhra%2520Pradesh!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <p>&copy; Tasty &amp; Quality Noodles &amp; Biryani Spot. All rights reserved.</p>
-  <p class="designer-credit">Designed by RAHULCHAKRI KASUKURTHI</p>
+  <p>&copy; 2026 Tasty & Quality Noodles & Biryani Spot. All rights reserved.</p>
+  <p style="margin-top: 8px; color: var(--yellow); font-weight: 600;">Website developed by RAHULCHAKRI KASUKURTHI</p>
 </footer>
 
+<script>
+function filterMenu(category) {
+  const buttons = document.querySelectorAll('.tabs button');
+  buttons.forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+  event.target.setAttribute('aria-pressed', 'true');
+
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
 </body>
 </html>
